@@ -1305,3 +1305,399 @@
     font-size: 1.15rem;
   }
 }
+
+/* Mission 12 — Love Quiz */
+.quiz-entry-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 30px auto 100px;
+  padding: 13px 22px;
+  border: 1px solid rgba(225, 185, 255, 0.38);
+  border-radius: 40px;
+  background: linear-gradient(120deg, rgba(117, 65, 157, 0.35), rgba(48, 30, 85, 0.55));
+  color: #f8eaff;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 0 28px rgba(178, 112, 255, 0.12);
+  transition: 0.3s ease;
+}
+
+.quiz-entry-button:hover {
+  transform: translateY(-3px);
+  border-color: rgba(240, 205, 255, 0.8);
+  box-shadow: 0 8px 35px rgba(178, 112, 255, 0.25);
+}
+
+.quiz-entry-arrow {
+  font-size: 1.1rem;
+}
+
+.quiz-scene {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 100vh;
+  padding: 105px 22px 115px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.quiz-card {
+  position: relative;
+  width: min(100%, 510px);
+  margin: 25px auto 0;
+  padding: 34px 30px;
+  overflow: hidden;
+  border: 1px solid rgba(218, 185, 255, 0.24);
+  border-radius: 25px;
+  background: linear-gradient(145deg, rgba(34, 24, 61, 0.88), rgba(13, 12, 32, 0.92));
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.32), 0 0 45px rgba(150, 90, 220, 0.1);
+  backdrop-filter: blur(18px);
+  animation: quizCardAppear 0.65s ease both;
+}
+
+@keyframes quizCardAppear {
+  from { opacity: 0; transform: translateY(22px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.quiz-progress {
+  margin: 0 0 12px;
+  color: #c9a8ed;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+}
+
+.quiz-progress-track {
+  width: 100%;
+  height: 3px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #a879e8, #f0b9df);
+  transition: width 0.45s ease;
+}
+
+.quiz-heart {
+  display: inline-block;
+  color: #e9a8e8;
+  font-size: 1.8rem;
+  animation: quizHeartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes quizHeartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+.quiz-question {
+  margin: 15px 0 27px;
+  color: #fff2ff;
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.quiz-answers {
+  display: grid;
+  gap: 11px;
+}
+
+.quiz-answer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 54px;
+  padding: 12px 15px;
+  border: 1px solid rgba(220, 195, 255, 0.17);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.045);
+  color: #eee5fa;
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.quiz-answer:hover:not(:disabled),
+.quiz-answer.selected {
+  border-color: rgba(220, 170, 255, 0.7);
+  background: rgba(151, 100, 200, 0.2);
+}
+
+.quiz-answer:disabled {
+  cursor: default;
+}
+
+.quiz-answer-number {
+  color: #b995df;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.quiz-answer-check {
+  margin-left: auto;
+  color: #f2b9ed;
+  font-size: 1.1rem;
+}
+
+.quiz-reaction {
+  margin-top: 23px;
+  animation: quizCardAppear 0.35s ease both;
+}
+
+.quiz-reaction p,
+.quiz-result-message {
+  color: #e8d7f5;
+  font-size: 0.95rem;
+  line-height: 1.9;
+}
+
+.quiz-next-button {
+  margin-top: 13px;
+  padding: 12px 23px;
+  border: 1px solid rgba(230, 190, 255, 0.42);
+  border-radius: 30px;
+  background: rgba(154, 103, 198, 0.24);
+  color: #fff0ff;
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.quiz-next-button:hover {
+  transform: translateY(-2px);
+  background: rgba(154, 103, 198, 0.4);
+}
+
+.quiz-result-heart {
+  margin-bottom: 12px;
+  font-size: 3rem;
+  animation: quizHeartbeat 1.5s infinite;
+}
+
+.quiz-result-message {
+  margin: 0 auto 20px;
+}
+
+.quiz-floating-hearts {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 25px 0 12px;
+  color: #f0a9e2;
+}
+
+.quiz-floating-hearts span {
+  display: inline-block;
+  animation: quizFloat 2s ease-in-out infinite;
+}
+
+.quiz-floating-hearts span:nth-child(even) {
+  animation-delay: 0.5s;
+  color: #c5a1ff;
+}
+
+.quiz-floating-hearts span:nth-child(3) {
+  animation-delay: 1s;
+}
+
+@keyframes quizFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-13px) scale(1.25); opacity: 1; }
+}
+
+@media (max-width: 520px) {
+  .quiz-scene {
+    padding: 95px 15px 105px;
+  }
+
+  .quiz-card {
+    padding: 27px 19px;
+    border-radius: 20px;
+  }
+
+  .quiz-answer {
+    min-height: 50px;
+    padding: 11px 12px;
+    font-size: 0.82rem;
+  }
+
+  .quiz-entry-button {
+    margin-bottom: 95px;
+    padding: 12px 16px;
+    font-size: 0.78rem;
+  }
+}
+
+/* FIX: allow vertical scrolling only on the Quiz page */
+html:has(.quiz-scene),
+body:has(.quiz-scene),
+#root:has(.quiz-scene) {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+body:has(.quiz-scene) {
+  position: relative !important;
+}
+
+#root:has(.quiz-scene) {
+  width: 100%;
+}
+
+.universe:has(.quiz-scene) {
+  position: relative !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow: visible !important;
+  overflow-x: hidden !important;
+}
+
+.quiz-scene {
+  height: auto !important;
+  min-height: 100vh !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding-bottom: 140px !important;
+}
+
+
+/* MISSION 13 — SECRET MESSAGE */
+.secret-scene {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(90%, 650px);
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 100px 20px 120px;
+  text-align: center;
+}
+
+.secret-entry-button {
+  display: block;
+  margin: 18px auto 110px;
+  padding: 13px 22px;
+  border: 1px solid rgba(235, 190, 255, 0.38);
+  border-radius: 30px;
+  background: rgba(115, 75, 155, 0.18);
+  color: #f6eaff;
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.secret-entry-button:hover {
+  transform: translateY(-3px);
+  background: rgba(150, 100, 195, 0.3);
+  box-shadow: 0 8px 30px rgba(180, 120, 230, 0.2);
+}
+
+.secret-card {
+  width: min(100%, 520px);
+  padding: clamp(28px, 6vw, 48px);
+  border: 1px solid rgba(225, 190, 255, 0.3);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(42, 27, 67, 0.92), rgba(14, 12, 34, 0.94));
+  box-shadow: 0 25px 90px rgba(0, 0, 0, 0.38), 0 0 50px rgba(174, 112, 220, 0.13);
+  backdrop-filter: blur(18px);
+  animation: quizCardAppear 0.8s ease both;
+}
+
+.secret-lock {
+  margin-bottom: 18px;
+  font-size: 3rem;
+  animation: quizHeartbeat 2s ease-in-out infinite;
+}
+
+.secret-kicker {
+  color: #c9a8ed;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+}
+
+.secret-title {
+  margin: 18px 0;
+  color: #fff0ff;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.secret-hint {
+  color: #d8c6e9;
+  line-height: 1.8;
+}
+
+.secret-open-button {
+  margin-top: 18px;
+  padding: 13px 25px;
+  border: 1px solid rgba(235, 190, 255, 0.5);
+  border-radius: 30px;
+  background: rgba(157, 102, 198, 0.25);
+  color: #fff0ff;
+  font: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.secret-open-button:hover {
+  transform: translateY(-3px);
+  background: rgba(157, 102, 198, 0.45);
+  box-shadow: 0 8px 28px rgba(190, 130, 230, 0.2);
+}
+
+.secret-message {
+  margin: 25px 0;
+  color: #f0e0f4;
+  font-size: clamp(0.95rem, 3vw, 1.08rem);
+  line-height: 2.1;
+  animation: quizCardAppear 0.7s ease both;
+}
+
+.secret-signature {
+  margin-top: 25px;
+  color: #d9aee9;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.3rem;
+  font-style: italic;
+}
+
+@media (max-width: 520px) {
+  .secret-scene {
+    padding: 90px 15px 100px;
+  }
+
+  .secret-card {
+    padding: 30px 20px;
+  }
+
+  .secret-entry-button {
+    margin-bottom: 100px;
+  }
+}

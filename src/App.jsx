@@ -9,6 +9,10 @@ function App() {
   const [musicPlaying, setMusicPlaying] = useState(false);
   const [scene, setScene] = useState("intro");
   const [envelopeOpened, setEnvelopeOpened] = useState(false);
+  const [quizIndex, setQuizIndex] = useState(0);
+  const [quizAnswer, setQuizAnswer] = useState(null);
+  const [quizFinished, setQuizFinished] = useState(false);
+  const [secretOpened, setSecretOpened] = useState(false);
 
   const memories = [
     { image: "/memories/memory-01-sunset-selfie.jpeg", title: "Our sunset", text: "A moment I want to keep forever." },
@@ -232,6 +236,56 @@ function App() {
     }
   };
 
+  const quizQuestions = [
+    {
+      question: "شكون فينا كيبالغ فالأمور أكثر؟ 😂",
+      answers: ["أنا طبعاً 😇", "نتا طبعاً 🙄", "بجوجنا 😂"],
+      reactions: [
+        "هههه، على الأقل أنا صريحة مع راسي! 😇❤️",
+        "واش نتا متأكد؟ عندي رأي آخر 😂",
+        "هادي هي الحقيقة، بجوجنا ما ساهلينش 😂❤️",
+      ],
+    },
+    {
+      question: "إلا كان عندنا نهار كامل غير لينا، شنو تختاري نديرو؟",
+      answers: ["نكتاشفو بلاصة جديدة 🌍", "نتفرجو فالغروب مجموعين 🌅", "فيلم وحضن دافي 🍿"],
+      reactions: [
+        "معاك حتى أبعد مغامرة غادي تكون زوينة! ✨",
+        "غير نكون معاك، حتى الغروب كيولي أجمل 🌅",
+        "هادشي اللي كنتمناه، غير نتي وأنا ❤️",
+      ],
+    },
+    {
+      question: "شنو هي أحلى حاجة فقصتنا؟",
+      answers: ["ضحكتك اللي كتعجبني 🥹", "الذكريات اللي عشنا 📸", "حيت لقيتك نتا ❤️"],
+      reactions: [
+        "ضحكتك من الحوايج اللي كنحب نشوف كل نهار! 🥹",
+        "ومازال عندنا بزاف ديال الذكريات نصاوبوها بجوج! 📸",
+        "حتى أنا هادا هو أحسن جواب عندي ❤️",
+      ],
+    },
+  ];
+
+  const chooseQuizAnswer = (index) => {
+    if (quizAnswer !== null) return;
+    setQuizAnswer(index);
+  };
+
+  const nextQuizQuestion = () => {
+    if (quizIndex < quizQuestions.length - 1) {
+      setQuizIndex((current) => current + 1);
+      setQuizAnswer(null);
+    } else {
+      setQuizFinished(true);
+    }
+  };
+
+  const restartQuiz = () => {
+    setQuizIndex(0);
+    setQuizAnswer(null);
+    setQuizFinished(false);
+  };
+
   const enterUniverse = () => {
     startMusic();
     setScene("envelope");
@@ -439,6 +493,147 @@ function App() {
             ))}
           </div>
           <p className="memories-ending">AND THIS IS ONLY THE BEGINNING ♥</p>
+          <button
+            className="quiz-entry-button"
+            onClick={() => {
+              restartQuiz();
+              setScene("quiz");
+            }}
+          >
+            <span>💘</span> جرّبي تعرفي شحال كنعرفك
+            <span className="quiz-entry-arrow">→</span>
+          </button>
+
+          <button
+            className="secret-entry-button"
+            onClick={() => {
+              setSecretOpened(false);
+              setScene("secret");
+            }}
+          >
+            🔐 A little secret for you
+          </button>
+        </section>
+      )}
+
+      {scene === "quiz" && (
+        <section className="quiz-scene">
+          <p className="eyebrow">
+            <span className="eyebrow-line" />
+            A LITTLE GAME FOR US
+            <span className="eyebrow-line" />
+          </p>
+
+          {!quizFinished ? (
+            <div className="quiz-card">
+              <p className="quiz-progress">
+                QUESTION {String(quizIndex + 1).padStart(2, "0")} / 03
+              </p>
+              <div className="quiz-progress-track">
+                <div
+                  className="quiz-progress-fill"
+                  style={{ width: `${((quizIndex + 1) / quizQuestions.length) * 100}%` }}
+                />
+              </div>
+
+              <span className="quiz-heart">♥</span>
+              <h2 className="quiz-question">
+                {quizQuestions[quizIndex].question}
+              </h2>
+
+              <div className="quiz-answers">
+                {quizQuestions[quizIndex].answers.map((answer, index) => (
+                  <button
+                    key={answer}
+                    className={`quiz-answer ${quizAnswer === index ? "selected" : ""}`}
+                    onClick={() => chooseQuizAnswer(index)}
+                    disabled={quizAnswer !== null}
+                  >
+                    <span className="quiz-answer-number">0{index + 1}</span>
+                    {answer}
+                    <span className="quiz-answer-check">
+                      {quizAnswer === index ? "♥" : "♡"}
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              {quizAnswer !== null && (
+                <div className="quiz-reaction">
+                  <p>{quizQuestions[quizIndex].reactions[quizAnswer]}</p>
+                  <button className="quiz-next-button" onClick={nextQuizQuestion}>
+                    {quizIndex === quizQuestions.length - 1 ? "شوفي المفاجأة ♥" : "السؤال الموالي →"}
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="quiz-card quiz-result">
+              <div className="quiz-result-heart">💗</div>
+              <p className="quiz-progress">MISSION COMPLETE</p>
+              <h2 className="quiz-question">ربحنا بجوج! ❤️</h2>
+              <p className="quiz-result-message">
+                فهاد اللعبة ما كاين لا رابح لا خاسر...
+                <br />
+                أنا الرابحة حيث عندي نتا فحياتي.
+                <br />
+                وبغيت نزيد معاك أجمل الذكريات، وحدة بوحدة. ✨
+              </p>
+              <div className="quiz-floating-hearts" aria-hidden="true">
+                <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
+              </div>
+              <button className="quiz-next-button" onClick={restartQuiz}>
+                عاودي اللعبة ↻
+              </button>
+            </div>
+          )}
+        </section>
+      )}
+
+      {scene === "secret" && (
+        <section className="secret-scene">
+          <p className="eyebrow">
+            <span className="eyebrow-line" />
+            JUST BETWEEN YOU AND ME
+            <span className="eyebrow-line" />
+          </p>
+
+          <div className="secret-card">
+            <div className="secret-lock">{secretOpened ? "💌" : "🔐"}</div>
+            <p className="secret-kicker">ONE LAST LITTLE SECRET</p>
+            <h2 className="secret-title">
+              {secretOpened ? "A promise from my heart..." : "There's something I want you to know"}
+            </h2>
+
+            {secretOpened ? (
+              <p className="secret-message">
+                من بين جميع الناس، والأماكن، واللحظات...
+                <br />
+                أنا فرحان حيث نتي جزء من حياتي.
+                <br />
+                ما بغيتش غير نعيش معاك لحظات زوينة،
+                <br />
+                بغيت نبقى نصاوب معاك ذكريات أكثر وأكثر.
+                <br /><br />
+                وهاد الحكاية ديالنا، بغيتها تبقى كتكتب... ❤️
+              </p>
+            ) : (
+              <>
+                <p className="secret-hint">
+                  شي كلمات مخبيين ليك من قلبي...
+                </p>
+                <button
+                  className="secret-open-button"
+                  onClick={() => setSecretOpened(true)}
+                >
+                  OPEN MY SECRET ♥
+                </button>
+              </>
+            )}
+            {secretOpened && (
+              <div className="secret-signature">Always yours ✦</div>
+            )}
+          </div>
         </section>
       )}
 
@@ -471,6 +666,16 @@ function App() {
               </button>
             </>
           )}
+          {scene === "quiz" && (
+            <button className="scene-nav-button scene-nav-previous" onClick={() => setScene("memories")}>
+              ←
+            </button>
+          )}
+          {scene === "secret" && (
+            <button className="scene-nav-button scene-nav-previous" onClick={() => setScene("memories")}>
+              ←
+            </button>
+          )}
         </nav>
       )}
 
@@ -481,7 +686,7 @@ function App() {
       </div>
 
       <div className="corner-label">
-        {scene === "intro" ? "01 / 04" : scene === "envelope" ? "02 / 04" : scene === "letter" ? "03 / 04" : "04 / 04"}
+        {scene === "intro" ? "01 / 06" : scene === "envelope" ? "02 / 06" : scene === "letter" ? "03 / 06" : scene === "memories" ? "04 / 06" : scene === "quiz" ? "05 / 06" : "06 / 06"}
       </div>
     </main>
   );
