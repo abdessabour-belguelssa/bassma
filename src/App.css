@@ -1050,3 +1050,145 @@
     height: 230px;
   }
 }
+
+/* MISSION 11 — MUSIC, TERMINAL & NAVIGATION */
+
+.terminal-line {
+  min-height: 24px;
+  margin: 22px auto;
+  color: #cbb6ff;
+  font-family: monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+.terminal-line span {
+  color: #8f72d8;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  margin-left: 3px;
+  color: #e8d9ff;
+  font-style: normal;
+  animation: terminalBlink 0.8s steps(2, start) infinite;
+}
+
+@keyframes terminalBlink {
+  to { visibility: hidden; }
+}
+
+.music-toggle {
+  display: block;
+  margin: 14px auto 0;
+  padding: 10px 20px;
+  color: #e9dcff;
+  font-size: 10px;
+  letter-spacing: 2px;
+  border: 1px solid rgba(210, 180, 255, 0.3);
+  border-radius: 30px;
+  background: rgba(120, 85, 180, 0.13);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.music-toggle:hover {
+  background: rgba(150, 110, 210, 0.3);
+  transform: translateY(-2px);
+}
+
+.music-icon {
+  margin-right: 9px;
+  font-size: 15px;
+}
+
+.page-navigation {
+  position: fixed;
+  z-index: 20;
+  right: 0;
+  bottom: 58px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 0 14px;
+  pointer-events: none;
+}
+
+.page-navigation button {
+  pointer-events: auto;
+  padding: 11px 18px;
+  color: #eee2ff;
+  font-size: 10px;
+  letter-spacing: 1px;
+  border: 1px solid rgba(215, 190, 255, 0.35);
+  border-radius: 30px;
+  background: rgba(18, 13, 38, 0.88);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-navigation button:hover {
+  border-color: rgba(235, 210, 255, 0.8);
+  background: rgba(100, 70, 150, 0.55);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .terminal-line {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .page-navigation {
+    bottom: 52px;
+    gap: 8px;
+  }
+
+  .page-navigation button {
+    padding: 10px 13px;
+    font-size: 9px;
+  }
+}
+
+/* Mission 11 — Global music control */
+.music-toggle-global {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border: 1px solid rgba(220, 195, 255, 0.3);
+  border-radius: 30px;
+  background: rgba(15, 12, 30, 0.65);
+  color: #eee4ff;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.music-toggle-global:hover {
+  background: rgba(100, 70, 150, 0.55);
+  border-color: rgba(235, 210, 255, 0.8);
+}
+
+.music-toggle-global span {
+  font-size: 17px;
+}
+
+@media (max-width: 480px) {
+  .music-toggle-global {
+    top: 14px;
+    right: 12px;
+    padding: 9px 12px;
+    font-size: 8px;
+  }
+}

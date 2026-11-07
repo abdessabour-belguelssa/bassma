@@ -4,6 +4,9 @@ import "./App.css";
 
 function App() {
   const canvasRef = useRef(null);
+  const audioRef = useRef(null);
+  const musicStartedRef = useRef(false);
+  const [musicPlaying, setMusicPlaying] = useState(false);
   const [scene, setScene] = useState("intro");
   const [envelopeOpened, setEnvelopeOpened] = useState(false);
 
@@ -182,7 +185,55 @@ function App() {
     return () => context.revert();
   }, [scene]);
 
+  const startMusic = () => {
+    const audio = audioRef.current;
+    if (!audio || musicStartedRef.current) return;
+
+    musicStartedRef.current = true;
+    audio.volume = 0;
+
+    audio.play()
+      .then(() => {
+        window.setTimeout(() => {
+          gsap.to(audio, {
+            volume: 0.45,
+            duration: 3,
+            ease: "power1.out",
+          });
+        }, 3000);
+      })
+      .catch(() => {
+        musicStartedRef.current = false;
+      });
+  };
+
+  const toggleMusic = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      audio.volume = 0;
+      audio.play()
+        .then(() => {
+          musicStartedRef.current = true;
+          gsap.to(audio, {
+            volume: 0.45,
+            duration: 1.5,
+            ease: "power1.out",
+          });
+        })
+        .catch(() => {});
+    } else {
+      gsap.to(audio, {
+        volume: 0,
+        duration: 0.8,
+        onComplete: () => audio.pause(),
+      });
+    }
+  };
+
   const enterUniverse = () => {
+    startMusic();
     setScene("envelope");
   };
 
@@ -210,10 +261,27 @@ function App() {
 
   return (
     <main className="universe">
+      <audio
+        ref={audioRef}
+        src="/music/cestToi-from-1min.mp3"
+        preload="auto"
+        onPlay={() => setMusicPlaying(true)}
+        onPause={() => setMusicPlaying(false)}
+      />
+
       <canvas ref={canvasRef} className="star-canvas" />
 
       <div className="ambient-glow glow-one" />
       <div className="ambient-glow glow-two" />
+
+      <button
+        className="music-toggle-global"
+        onClick={toggleMusic}
+        aria-label={musicPlaying ? "Pause music" : "Play music"}
+      >
+        <span>{musicPlaying ? "♫" : "♪"}</span>
+        {musicPlaying ? "PAUSE OUR SONG" : "PLAY OUR SONG"}
+      </button>
 
       {scene === "intro" && (
         <section className="hero-content intro-content">
