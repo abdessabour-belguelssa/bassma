@@ -259,6 +259,24 @@ function App() {
     });
   };
 
+  const resetEnvelope = () => {
+    gsap.killTweensOf(".envelope-flap");
+    gsap.killTweensOf(".envelope-letter");
+    gsap.set(".envelope-flap", { rotateX: 0 });
+    gsap.set(".envelope-letter", { y: 0 });
+    setEnvelopeOpened(false);
+  };
+
+  const goToEnvelope = () => {
+    resetEnvelope();
+    setScene("envelope");
+  };
+
+  const goToIntro = () => {
+    resetEnvelope();
+    setScene("intro");
+  };
+
   return (
     <main className="universe">
       <audio
@@ -422,6 +440,38 @@ function App() {
           </div>
           <p className="memories-ending">AND THIS IS ONLY THE BEGINNING ♥</p>
         </section>
+      )}
+
+      {scene !== "intro" && (
+        <nav className="scene-navigation" aria-label="Story navigation">
+          {scene === "envelope" && (
+            <button className="scene-nav-button scene-nav-previous" onClick={goToIntro}>
+              ←
+            </button>
+          )}
+
+          {scene === "letter" && (
+            <>
+              <button className="scene-nav-button scene-nav-previous" onClick={goToEnvelope}>
+                ←
+              </button>
+              <button className="scene-nav-button scene-nav-next" onClick={() => setScene("memories")}>
+                →
+              </button>
+            </>
+          )}
+
+          {scene === "memories" && (
+            <>
+              <button className="scene-nav-button scene-nav-previous" onClick={() => setScene("letter")}>
+                ←
+              </button>
+              <button className="scene-nav-button scene-nav-next" onClick={goToIntro}>
+                ↻
+              </button>
+            </>
+          )}
+        </nav>
       )}
 
       <div className="bottom-caption">
