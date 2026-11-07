@@ -359,19 +359,21 @@ function App() {
         <section className="hero-content intro-content">
           <p className="eyebrow">
             <span className="eyebrow-line" />
-            A LITTLE UNIVERSE, JUST FOR YOU
+            كون صغير... غير على قبالك
             <span className="eyebrow-line" />
           </p>
 
-          <h1 className="hero-title">
-            THE ONLY
-            <span>STAR</span>
+          <h1 className="hero-title bassma-title">
+            <span>BASSMA</span>
           </h1>
 
           <p className="hero-description">
-            In a universe full of stars,
+            فوسط كون عامر بالنجوم،
             <br />
-            my eyes will always search for you.
+            عيني ديما غادي تقلب عليك.
+          </p>
+          <p className="hero-dedication">
+            حبيبتي <span>Bassma</span> <span className="dedication-heart">❤️</span>
           </p>
 
           <button className="enter-button" onClick={enterUniverse}>
@@ -424,30 +426,36 @@ function App() {
       {scene === "letter" && (
         <section className="letter-scene">
           <div className="letter-paper">
-            <p className="letter-kicker">A LETTER FOR YOU</p>
+            <p className="letter-kicker">KELMA MN 9ELBI LIK</p>
 
             <div className="letter-divider">✦</div>
 
-            <h2 className="letter-heading">To my only star,</h2>
+            <h2 className="letter-heading">L njmti lwa7ida, Bassma,</h2>
 
             <p className="letter-paragraph">
-              If I could give you one thing in this universe,
-              it would be the ability to see yourself through my eyes.
+              Kon kan 3andi ghir 7aja wa7da n3tiha lik f had l-koun,
+              kont n3tik 3iniya bach tchofi rassek kifach kanchofek ana.
             </p>
 
             <p className="letter-paragraph">
-              Then you would understand how special you are,
-              how much light you bring into my world,
-              and why my heart keeps choosing you.
+              Ghadi tfhmi ch7al nti ghaliya 3liya, ch7al katdwi 7yati,
+              o 3lach 9elbi, mn bin ga3 nass, dima kaykhtarek nti.
             </p>
 
             <p className="letter-paragraph">
-              No matter how many stars fill the sky,
-              you will always be my favourite one.
+              Wakha ykono alf nejma f sma, nti dima nejmti lmofaddala.
+              Nti dyali o ana dyalek... o ma bghit 7ta wa7ed ychof dak noor
+              li kanchof fik ana.
             </p>
 
-            <p className="letter-signature">With all my love,</p>
-            <p className="letter-name">Yours ♥</p>
+            <p className="letter-paragraph">
+              Ma tkhafich 3liya, ana dima hna, 7dak, o 9elbi m3ak finma mchiti.
+              O bghitni nb9a m3ak, n3ich m3ak kol nhar, o nsaybo m3a b3diyatna
+              7kaya ma tsalich.
+            </p>
+
+            <p className="letter-signature">B kol 7obbi,</p>
+            <p className="letter-name">9elbi reserved lik, nti bo7dek ❤</p>
           </div>
 
           <button
