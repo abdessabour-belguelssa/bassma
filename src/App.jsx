@@ -359,7 +359,7 @@ function App() {
         <section className="hero-content intro-content">
           <p className="eyebrow">
             <span className="eyebrow-line" />
-            كون صغير... غير على قبالك
+            ماخترتش فين نعيش بالحق، خترعت لينا عالم
             <span className="eyebrow-line" />
           </p>
 
